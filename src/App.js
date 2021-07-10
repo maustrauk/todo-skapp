@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { SkynetClient } from 'skynet-js';
 
-import './App.css';
-
 import TodoList from "./components/TodoList";
 import Login from './components/Login';
 

@@ -1,15 +1,17 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
+import StyledLi from "../styles/styledLi";
+
 const TodoItem = (props) => {
     const { id, item, onCheck } = props;
     return (
         <>
-        <li
+        <StyledLi
             onClick={() => {onCheck(id)}}
         >
             {item}  
-        </li>
+        </StyledLi>
         </>
     )
 }
