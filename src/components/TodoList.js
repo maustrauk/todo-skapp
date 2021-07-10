@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import TodoItem from "./TodoItem";
+import Loading from './Loading';
 
 import StyledButton from '../styles/styledButton';
 import StyledInput from '../styles/styledInput';
@@ -39,24 +40,26 @@ const TodoList = (props) => {
           <StyledHeading>
               <StyledH1 className="title">To-Do List</StyledH1>
           </StyledHeading>
-              <StyledInput
+          <StyledInput
                   type="text"
                   value={input}
                   onChange={(event) => {setInput(event.target.value)}}
               />
-              <StyledButton onClick={addItem}>Add</StyledButton>
+        <StyledButton onClick={addItem}>Add</StyledButton>
 
           <StyledItems>
-            <ul>
+              {loading ? <Loading/> : 
+              <ul>
                 {items.map((item, index) => (
-                    <TodoItem
-                        key={index}
-                        id={index}
-                        item={item}
-                        onCheck={removeItem}
-                    />
+                  <TodoItem
+                      key={index}
+                      id={index}
+                      item={item}
+                      onCheck={removeItem}
+                  />
                 ))}
-            </ul>
+                </ul>}
+            
           </StyledItems>
           <StyledButton onClick={saveData}>Save</StyledButton>
           <StyledButton onClick={handleMySkyLogout}>Log Out</StyledButton>
