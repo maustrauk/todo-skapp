@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import TodoItem from "./TodoItem";
 
 const TodoList = (props) => {
-    const {input, setInput, items, addItem, removeItem, submitForm, loadData} = props;
+    const {input, setInput, items, addItem, removeItem, submitForm, loadData, handleMySkyLogout} = props;
 
     return (
       <div className="todolist">
@@ -32,6 +32,7 @@ const TodoList = (props) => {
           </div>
           <button onClick={submitForm}>Save</button>
           <button onClick={loadData}>Load</button>
+          <button onClick={handleMySkyLogout}>Log Out</button>
       </div>
     );
 }
@@ -44,6 +45,7 @@ TodoList.propTypes = {
     removeItem: PropTypes.func.isRequired,
     submitForm: PropTypes.func.isRequired,
     loadData: PropTypes.func.isRequired,
+    handleMySkyLogout: PropTypes.func.isRequired,
 }
 
 export default TodoList;

@@ -4,6 +4,7 @@ import { SkynetClient } from 'skynet-js';
 import './App.css';
 
 import TodoList from "./components/TodoList";
+import Login from './components/Login';
 
 
 const portal =
@@ -50,10 +51,8 @@ function App() {
             try {
               const mySky = await client.loadMySky(dataDomain);
       
-              const loggedIn = await mySky.checkLogin();
-      
               setMySky(mySky);
-              setLoggedIn(loggedIn);
+
               if (loggedIn) {
                 setUserID(await mySky.userID());
               }
@@ -107,6 +106,9 @@ function App() {
     
         setLoggedIn(false);
         setUserID('');
+
+        console.log("Logout succsesfull");
+        window.location.reload();
       };
 
   const loadData = async (event) => {
@@ -134,10 +136,13 @@ function App() {
     removeItem,
     submitForm,
     loadData,
+    handleMySkyLogout,
   };
 
     return (
-      <TodoList {...todoListProps}/>
+         <div>
+             {(loggedIn !== true) ? <Login handleMySkyLogin={handleMySkyLogin}/> : <TodoList {...todoListProps}/>}
+         </div>
     );
 }
 
