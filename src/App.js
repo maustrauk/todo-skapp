@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { SkynetClient } from 'skynet-js';
+import { ContentRecordDAC } from '@skynetlabs/content-record-library';
 
 import TodoList from "./components/TodoList";
 import Login from './components/Login';
@@ -9,6 +10,8 @@ const portal =
   window.location.hostname === 'localhost' ? 'https://siasky.net' : undefined;
 
 const client = new SkynetClient(portal);
+
+const contentRecord = new ContentRecordDAC();
 
 function App() {
     const dataDomain = 'localhost';
@@ -24,7 +27,7 @@ function App() {
     const [input, setInput] = useState("");
     const [items, setItems] = useState([]);
 
-    function addItem(event) {
+    const addItem = () => {
         setItems(prevData => {
             return [...prevData, input];
         });
@@ -32,7 +35,7 @@ function App() {
         setInput("");
     }
 
-    function removeItem(id) {
+    const removeItem = (id) => {
         setItems(prevData => {
             return prevData.filter((item, index) => {
                 return index !== id;
@@ -40,31 +43,9 @@ function App() {
         });
     }
 
-    useEffect(() => {
-        setFilePath(dataDomain + '/' + dataKey);
-    }, [dataKey]);
 
-    useEffect(() => {
-        async function initMySky() {
-            try {
-              const mySky = await client.loadMySky(dataDomain);
-      
-              setMySky(mySky);
-
-              if (loggedIn) {
-                setUserID(await mySky.userID());
-              }
-            } catch (e) {
-              console.error(e);
-            }
-          }
-
-          initMySky();
-    },  []);
-
-    const submitForm = async (event) => {
-        event.preventDefault();
-        console.log('form submitted');
+    const saveData = async () => {
+        console.log('data Send to MySky');
         setLoading(true);
     
         const jsonData = {
@@ -86,6 +67,14 @@ function App() {
         } catch (error) {
           console.log(`error with setJSON: ${error.message}`);
         }
+
+        try {
+            await contentRecord.recordNewContent({
+              items: jsonData.items,
+            });
+          } catch (error) {
+            console.log(`error with CR DAC: ${error.message}`);
+          }
       };
 
       const handleMySkyLogin = async () => {
@@ -95,6 +84,7 @@ function App() {
     
         if (status) {
           setUserID(await mySky.userID());
+          await loadData();
         }
     
       };
@@ -106,11 +96,9 @@ function App() {
         setUserID('');
 
         console.log("Logout succsesfull");
-        window.location.reload();
       };
 
-  const loadData = async (event) => {
-    event.preventDefault();
+  const loadData = async () => {
     setLoading(true);
     console.log('Loading user data from SkyDB');
 
@@ -132,10 +120,36 @@ function App() {
     items,
     addItem,
     removeItem,
-    submitForm,
-    loadData,
     handleMySkyLogout,
+    saveData,
+    loading,
   };
+
+  useEffect(() => {
+        setFilePath(dataDomain + '/' + dataKey);
+    }, [dataKey]);
+
+    useEffect(() => {
+        async function initMySky() {
+            try {
+                const mySky = await client.loadMySky(dataDomain);
+
+                await mySky.loadDacs(contentRecord);
+        
+                const loggedIn = await mySky.checkLogin();
+        
+                setMySky(mySky);
+                setLoggedIn(loggedIn);
+                if (loggedIn) {
+                  setUserID(await mySky.userID());
+                }
+              } catch (e) {
+                console.error(e);
+              }
+          }
+
+          initMySky();
+    },  []);
 
     return (
          <div>

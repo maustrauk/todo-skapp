@@ -32,7 +32,7 @@ const StyledTodoList = styled.div`
 
 
 const TodoList = (props) => {
-    const {input, setInput, items, addItem, removeItem, submitForm, loadData, handleMySkyLogout} = props;
+    const {input, setInput, items, addItem, removeItem, handleMySkyLogout, saveData, loading} = props;
 
     return (
       <StyledTodoList>
@@ -58,8 +58,7 @@ const TodoList = (props) => {
                 ))}
             </ul>
           </StyledItems>
-          <StyledButton onClick={submitForm}>Save</StyledButton>
-          <StyledButton onClick={loadData}>Load</StyledButton>
+          <StyledButton onClick={saveData}>Save</StyledButton>
           <StyledButton onClick={handleMySkyLogout}>Log Out</StyledButton>
       </StyledTodoList>
     );
@@ -71,9 +70,9 @@ TodoList.propTypes = {
     setInput: PropTypes.func.isRequired,
     addItem: PropTypes.func.isRequired,
     removeItem: PropTypes.func.isRequired,
-    submitForm: PropTypes.func.isRequired,
-    loadData: PropTypes.func.isRequired,
     handleMySkyLogout: PropTypes.func.isRequired,
+    saveData: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
 }
 
 export default TodoList;

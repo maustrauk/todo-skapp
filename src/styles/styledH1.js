@@ -8,6 +8,7 @@ const StyledH1 = styled.h1`
     border-radius: 20% 5% 20% 5%/5% 20% 25% 20%;
     padding: 0.2rem 1.2rem;
     color: #494a4b;
+    font-size: 1.8rem;
 `;
 
 export default StyledH1;
