@@ -1,6 +1,8 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
-function TodoItem({ id, item, onCheck }) {
+const TodoItem = (props) => {
+    const { id, item, onCheck } = props;
     return (
         <>
         <li
@@ -10,6 +12,12 @@ function TodoItem({ id, item, onCheck }) {
         </li>
         </>
     )
+}
+
+TodoItem.propTypes ={
+    id: PropTypes.number.isRequired,
+    item: PropTypes.string.isRequired,
+    onCheck: PropTypes.func.isRequired,
 }
 
 export default TodoItem;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TodoItem from "./components/TodoItem";
+import TodoList from "./components/TodoList";
 import './App.css';
 
 function App() {
@@ -23,30 +23,7 @@ function App() {
     }
 
     return (
-      <div className="todolist">
-          <div className="heading">
-              <h1 className="title">To-Do List</h1>
-          </div>
-              <input
-                  type="text"
-                  value={input}
-                  onChange={(event) => {setInput(event.target.value)}}
-              />
-              <button onClick={addItem}>Add</button>
-
-          <div className="items">
-            <ul>
-                {items.map((item, index) => (
-                    <TodoItem
-                        key={index}
-                        id={index}
-                        item={item}
-                        onCheck={removeItem}
-                    />
-                ))}
-            </ul>
-          </div>
-      </div>
+      <TodoList input={input} setInput={setInput} items={items} addItem={addItem} removeItem={removeItem}/>
     );
 }
 
