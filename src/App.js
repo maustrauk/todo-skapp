@@ -13,7 +13,7 @@ const client = new SkynetClient(portal);
 
 const contentRecord = new ContentRecordDAC();
 
-function App() {
+const App = () => {
     const dataDomain = 'localhost';
 
     const [loading, setLoading] = useState(false);
@@ -27,20 +27,23 @@ function App() {
     const [input, setInput] = useState("");
     const [items, setItems] = useState([]);
 
-    const addItem = () => {
+    const addItem = async () => {
         setItems(prevData => {
             return [...prevData, input];
         });
         
         setInput("");
+        await saveData();
     }
 
-    const removeItem = (id) => {
+    const removeItem = async (id) => {
         setItems(prevData => {
             return prevData.filter((item, index) => {
                 return index !== id;
             })
         });
+
+        await saveData();
     }
 
 
@@ -114,17 +117,6 @@ function App() {
     setLoading(false);
   };
 
-  const todoListProps = {
-    input,
-    setInput,
-    items,
-    addItem,
-    removeItem,
-    handleMySkyLogout,
-    saveData,
-    loading,
-  };
-
   useEffect(() => {
         setFilePath(dataDomain + '/' + dataKey);
     }, [dataKey]);
@@ -150,6 +142,16 @@ function App() {
 
           initMySky();
     },  []);
+
+    const todoListProps = {
+        input,
+        setInput,
+        items,
+        addItem,
+        removeItem,
+        handleMySkyLogout,
+        loading,
+      };
 
     return (
          <div>
