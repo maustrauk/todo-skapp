@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledP = styled.p`
+const StyledA = styled.a`
     margin-top: 10px;
     margin-left: 5%;
     margin-right: 5%;
@@ -10,4 +10,4 @@ const StyledP = styled.p`
     word-wrap: break-word;
 `;
 
-export default StyledP;
+export default StyledA;
