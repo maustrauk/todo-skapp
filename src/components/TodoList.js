@@ -10,7 +10,7 @@ import StyledInput from '../styles/styledInput';
 import StyledH1 from '../styles/styledH1';
 
 const StyledItems = styled.div`
-    margin: 50px 0 0 30px;
+    margin-top: 20px;
 `;
 
 const StyledHeading = styled.div`
@@ -49,17 +49,14 @@ const TodoList = (props) => {
 
           <StyledItems>
               {loading ? <Loading/> : 
-              <ul>
-                {items.map((item, index) => (
+                items.map((item, index) => (
                   <TodoItem
                       key={index}
                       id={index}
                       item={item}
                       onCheck={removeItem}
                   />
-                ))}
-                </ul>}
-            
+                ))}   
           </StyledItems>
           <StyledButton onClick={handleMySkyLogout}>Log Out</StyledButton>
       </StyledTodoList>

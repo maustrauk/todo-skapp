@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-import logo from '../assets/skynet_logo.svg';
+import loadSVG from '../assets/loading.svg';
 import StyledImg from '../styles/styledImg';
 
 const loadinImgSpin = keyframes`
@@ -17,7 +17,7 @@ const LoadingImg = styled(StyledImg)`
 const Loading = () => {
     return (<div>
         <p>Loading...</p>
-        <LoadingImg src={logo} alt="logo" />
+        <LoadingImg src={loadSVG} alt="loading" />
     </div>)
 }
 

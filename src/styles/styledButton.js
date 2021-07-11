@@ -7,6 +7,9 @@ const StyledButton = styled.button`
     padding: 10px 15px;
     font-family: "Architects Daughter", sans-serif;
     font-size: 0.9rem;
+    &:hover {
+        background-color: gray;
+    }
 `;
 
 export default StyledButton;

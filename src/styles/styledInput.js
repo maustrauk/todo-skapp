@@ -9,6 +9,9 @@ const StyledInput = styled.input`
     padding: 10px 15px;
     width: 70%;
     color: #494a4b;
+    &:focus {
+        outline: none;
+    }
 `;
 
 export default StyledInput;
