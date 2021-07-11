@@ -27,23 +27,20 @@ const App = () => {
     const [input, setInput] = useState("");
     const [items, setItems] = useState([]);
 
-    const addItem = async () => {
+    const addItem = () => {
         setItems(prevData => {
             return [...prevData, input];
         });
         
         setInput("");
-        await saveData();
     }
 
-    const removeItem = async (id) => {
+    const removeItem = (id) => {
         setItems(prevData => {
             return prevData.filter((item, index) => {
                 return index !== id;
             })
         });
-
-        await saveData();
     }
 
 
@@ -151,6 +148,7 @@ const App = () => {
         removeItem,
         handleMySkyLogout,
         loading,
+        saveData,
       };
 
     return (

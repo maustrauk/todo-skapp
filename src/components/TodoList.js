@@ -33,7 +33,7 @@ const StyledTodoList = styled.div`
 
 
 const TodoList = (props) => {
-    const {input, setInput, items, addItem, removeItem, handleMySkyLogout, loading} = props;
+    const {input, setInput, items, addItem, removeItem, handleMySkyLogout, loading, saveData} = props;
 
     return (
       <StyledTodoList>
@@ -48,6 +48,7 @@ const TodoList = (props) => {
         <StyledButton onClick={addItem}>Add</StyledButton>
 
           <StyledItems>
+            <StyledButton onClick={saveData}>Save to MySky</StyledButton>
               {loading ? <Loading/> : 
                 items.map((item, index) => (
                   <TodoItem
@@ -71,6 +72,7 @@ TodoList.propTypes = {
     removeItem: PropTypes.func.isRequired,
     handleMySkyLogout: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
+    saveData: PropTypes.func.isRequired,
 }
 
 export default TodoList;
