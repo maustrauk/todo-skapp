@@ -9,9 +9,9 @@ import Login from './components/Login';
 const portal =
   window.location.hostname === 'localhost' ? 'https://siasky.net' : undefined;
 
-const client = new SkynetClient(portal);
+const client = new SkynetClient();
 
-const contentRecord = new ContentRecordDAC();
+const contentRecord = new ContentRecordDAC(portal);
 
 const App = () => {
     const dataDomain = 'localhost';
