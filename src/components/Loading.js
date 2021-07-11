@@ -10,13 +10,12 @@ const loadinImgSpin = keyframes`
 `
 
 const LoadingImg = styled(StyledImg)`
-    animation: ${loadinImgSpin} infinite 20s linear;
+    animation: ${loadinImgSpin} infinite 10s linear;
 `
 
 
 const Loading = () => {
     return (<div>
-        <p>Loading...</p>
         <LoadingImg src={loadSVG} alt="loading" />
     </div>)
 }
